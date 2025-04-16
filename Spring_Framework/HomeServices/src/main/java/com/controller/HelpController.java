@@ -1,10 +1,8 @@
-// com/controller/HelpController.java
 package com.controller;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
-import java.text.DecimalFormat; 
-import org.springframework.web.bind.annotation.RequestParam;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -16,34 +14,34 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.model.HelperBean;
 import com.service.HelperService;
 
+
+
 @Controller
 public class HelpController {
 
     @Autowired
     private HelperService helpService;
-    
-    @RequestMapping(value = "/showpage")
+
+    @RequestMapping(value = "/showpage", method = RequestMethod.GET)
     public String showPage(@ModelAttribute("helper") HelperBean helperBean, BindingResult result) {
         return "showpage";
     }
 
     @ModelAttribute("serviceList")
     public Map<String, String> buildState() {
-        Map<String, String> serviceList = new HashMap<>();
-        serviceList.put("ACService", "ACService");
-        serviceList.put("WashingMachineService", "WashingMachineService");
-        serviceList.put("RefrigeratorService", "RefrigeratorService");
-        return serviceList;
+        Map<String, String> services = new LinkedHashMap<>();
+        services.put("ACService", "ACService");
+        services.put("WashingMachineService", "WashingMachineService");
+        services.put("RefrigeratorService", "RefrigeratorService");
+        return services;
     }
-    @RequestMapping(value = "/helpdesk")
-    public String calculateTotalCost(@ModelAttribute("helper") HelperBean helperBean, ModelMap model, BindingResult result) {
-        double totalCost = helpService.calculateTotalCost(helperBean);
-        DecimalFormat df = new DecimalFormat("0.0");
-        String formattedTotalCost = df.format(totalCost);
 
-   model.addAttribute("cost", formattedTotalCost);
-//        model.addAttribute("totalCost","1600.0/-");
+    @RequestMapping(value = "/helpdesk", method = RequestMethod.POST)
+    public String calculateTotalCost(@ModelAttribute("helper") HelperBean helperBean, ModelMap model,
+            BindingResult result) {
+
+        double totalCost = helpService.calculateTotalCost(helperBean);
+        model.addAttribute("message", "Thank you for choosing our Service.You need to pay Rs." + totalCost);
         return "helpdesk";
     }
-
 }

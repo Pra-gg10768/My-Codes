@@ -1,11 +1,9 @@
-<%-- helpdesk.jsp --%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@ page contentType="text/html; charset=ISO-8859-1" %>
 <html>
 <head>
-    <title>Help Desk Result</title>
+    <title>Helpdesk</title>
 </head>
-<body style="background-color:lavender">
-    <h2>Thank you for choosing our Service.You need to pay Rs.${cost}/-</h2>
+<body bgcolor="mintcream">
+    <h2>${message}</h2>
 </body>
 </html>

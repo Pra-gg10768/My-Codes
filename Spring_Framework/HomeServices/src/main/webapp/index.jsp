@@ -9,6 +9,6 @@
   <body bgcolor="lavender">
    <center> <h2>Welcome to Online Bee-Bee Help Services</h2></center>
   
-    <center><a href="showpage">Click here to use the service</a></center>
+    <center><a href="">Click here to use the service</a></center>
    </body>
 </html>
